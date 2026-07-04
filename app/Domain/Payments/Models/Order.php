@@ -1,0 +1,65 @@
+<?php
+
+declare(strict_types=1);
+
+namespace App\Domain\Payments\Models;
+
+use App\Domain\Quiz\Models\QuizSession;
+use App\Models\User;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
+class Order extends Model
+{
+    protected $fillable = [
+        'reference',
+        'user_id',
+        'quiz_session_id',
+        'product_id',
+        'amount_cents',
+        'currency',
+        'status',
+        'customer_email',
+        'customer_name',
+        'metadata',
+    ];
+
+    protected function casts(): array
+    {
+        return [
+            'metadata' => 'array',
+        ];
+    }
+
+    public function user(): BelongsTo
+    {
+        return $this->belongsTo(User::class);
+    }
+
+    public function product(): BelongsTo
+    {
+        return $this->belongsTo(Product::class);
+    }
+
+    public function quizSession(): BelongsTo
+    {
+        return $this->belongsTo(QuizSession::class);
+    }
+
+    public function payments(): HasMany
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function latestPayment(): HasOne
+    {
+        return $this->hasOne(Payment::class)->latestOfMany();
+    }
+
+    public function getRouteKeyName(): string
+    {
+        return 'reference';
+    }
+}
