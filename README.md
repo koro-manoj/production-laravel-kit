@@ -99,6 +99,7 @@ curl -X POST http://localhost:8000/api/v1/quizzes/health-assessment/sessions \
 ## Documentation
 
 - [Architecture](docs/architecture.md)
+- [Deployment checklist](docs/DEPLOYMENT.md)
 - [Reliability & debug playbook](docs/reliability-debug-playbook.md)
 
 ## Default users

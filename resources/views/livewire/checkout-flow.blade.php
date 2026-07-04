@@ -1,36 +1,47 @@
-<div class="mx-auto max-w-xl">
-    <div class="rounded-3xl border border-white/10 bg-slate-900/70 p-8 shadow-xl">
-        <p class="text-sm uppercase tracking-wider text-indigo-300">Secure checkout</p>
-        <h1 class="mt-2 text-3xl font-bold text-white">{{ $product->name }}</h1>
-        <p class="mt-3 text-slate-300">{{ $product->description }}</p>
-        <p class="mt-6 text-4xl font-bold text-white">${{ number_format($product->price_cents / 100, 2) }}</p>
+<div class="mx-auto max-w-lg">
+    <div class="card-elevated overflow-hidden">
+        <div class="border-b border-ink/6 bg-paper-warm/80 px-8 py-6">
+            <p class="text-xs font-bold uppercase tracking-widest text-moss">Secure checkout</p>
+            <h1 class="mt-2 font-display text-3xl font-semibold text-ink">{{ $product->name }}</h1>
+            <p class="mt-2 text-ink-muted">{{ $product->description }}</p>
+        </div>
 
-        <form wire:submit="startCheckout" class="mt-8 space-y-4">
-            <div>
-                <label class="mb-1 block text-sm text-slate-400">Full name</label>
-                <input type="text" wire:model="customerName"
-                       class="w-full rounded-xl border border-white/10 bg-slate-950 px-4 py-3 text-white focus:border-indigo-400 focus:outline-none">
-                @error('customerName') <p class="mt-1 text-sm text-rose-400">{{ $message }}</p> @enderror
-            </div>
-            <div>
-                <label class="mb-1 block text-sm text-slate-400">Email</label>
-                <input type="email" wire:model="customerEmail"
-                       class="w-full rounded-xl border border-white/10 bg-slate-950 px-4 py-3 text-white focus:border-indigo-400 focus:outline-none">
-                @error('customerEmail') <p class="mt-1 text-sm text-rose-400">{{ $message }}</p> @enderror
+        <div class="px-8 py-6">
+            <div class="flex items-baseline justify-between border-b border-ink/6 pb-6">
+                <span class="text-sm font-medium text-ink-muted">Total</span>
+                <span class="font-display text-4xl font-semibold text-ink">${{ number_format($product->price_cents / 100, 2) }}</span>
             </div>
 
-            @if($errorMessage)
-                <div class="rounded-xl border border-amber-500/30 bg-amber-500/10 px-4 py-3 text-sm text-amber-100">
-                    {{ $errorMessage }}
+            <form wire:submit="startCheckout" class="mt-6 space-y-5">
+                <div>
+                    <label class="label-text">Full name</label>
+                    <input type="text" wire:model="customerName" class="input-field" autocomplete="name">
+                    @error('customerName') <p class="mt-1.5 text-sm text-clay">{{ $message }}</p> @enderror
                 </div>
-            @endif
+                <div>
+                    <label class="label-text">Email</label>
+                    <input type="email" wire:model="customerEmail" class="input-field" autocomplete="email">
+                    @error('customerEmail') <p class="mt-1.5 text-sm text-clay">{{ $message }}</p> @enderror
+                </div>
 
-            <button type="submit"
-                    wire:loading.attr="disabled"
-                    class="w-full rounded-xl bg-indigo-500 px-5 py-3 font-semibold text-white hover:bg-indigo-400 disabled:opacity-60">
-                <span wire:loading.remove>Pay with Stripe</span>
-                <span wire:loading>Redirecting…</span>
-            </button>
-        </form>
+                @if($errorMessage)
+                    <div class="rounded-xl border border-clay/20 bg-clay/5 px-4 py-3 text-sm text-clay-dark">
+                        {{ $errorMessage }}
+                    </div>
+                @endif
+
+                <button type="submit"
+                        wire:loading.attr="disabled"
+                        class="btn-primary w-full disabled:opacity-60">
+                    <span wire:loading.remove class="flex items-center justify-center gap-2">
+                        Pay with Stripe
+                        <svg class="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/></svg>
+                    </span>
+                    <span wire:loading>Redirecting&hellip;</span>
+                </button>
+
+                <p class="text-center text-xs text-ink-faint">Payments processed securely via Stripe sandbox. Credentials stored encrypted in the database.</p>
+            </form>
+        </div>
     </div>
 </div>

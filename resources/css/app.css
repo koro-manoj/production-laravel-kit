@@ -1,3 +1,98 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    html {
+        scroll-behavior: smooth;
+    }
+
+    ::selection {
+        @apply bg-moss/20 text-ink;
+    }
+}
+
+@layer components {
+    .site-bg {
+        background-color: theme('colors.paper.DEFAULT');
+        background-image:
+            radial-gradient(ellipse 80% 60% at 10% -10%, rgba(45, 90, 74, 0.07), transparent),
+            radial-gradient(ellipse 60% 50% at 90% 110%, rgba(192, 108, 74, 0.06), transparent);
+    }
+
+    .site-bg::before {
+        content: '';
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.35;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+        z-index: 0;
+    }
+
+    .btn-primary {
+        @apply inline-flex items-center justify-center gap-2 rounded-full bg-moss px-6 py-3 font-semibold text-paper shadow-card transition hover:bg-moss-light focus:outline-none focus:ring-2 focus:ring-moss focus:ring-offset-2 focus:ring-offset-paper;
+    }
+
+    .btn-secondary {
+        @apply inline-flex items-center justify-center gap-2 rounded-full border border-ink bg-white/60 px-6 py-3 font-semibold text-ink backdrop-blur-sm transition hover:border-moss hover:bg-white focus:outline-none focus:ring-2 focus:ring-moss focus:ring-offset-2 focus:ring-offset-paper;
+        border-color: rgba(28, 43, 40, 0.1);
+    }
+
+    .btn-secondary:hover {
+        border-color: rgba(45, 90, 74, 0.3);
+    }
+
+    .card {
+        @apply rounded-2xl bg-white/70 shadow-card backdrop-blur-sm;
+        border: 1px solid rgba(28, 43, 40, 0.08);
+    }
+
+    .card-elevated {
+        @apply rounded-2xl bg-white shadow-lift;
+        border: 1px solid rgba(28, 43, 40, 0.08);
+    }
+
+    .input-field {
+        @apply w-full rounded-xl bg-paper/50 px-4 py-3 text-ink placeholder:text-ink-faint transition focus:bg-white focus:outline-none focus:ring-2 focus:ring-moss;
+        border: 1px solid rgba(28, 43, 40, 0.1);
+    }
+
+    .input-field:focus {
+        border-color: rgba(45, 90, 74, 0.4);
+        --tw-ring-color: rgba(45, 90, 74, 0.15);
+    }
+
+    .label-text {
+        @apply mb-1.5 block text-sm font-medium text-ink-muted;
+    }
+
+    .progress-track {
+        @apply h-1.5 overflow-hidden rounded-full;
+        background-color: rgba(28, 43, 40, 0.08);
+    }
+
+    .progress-fill {
+        @apply h-full rounded-full bg-moss transition-all duration-500 ease-out;
+    }
+
+    .option-card {
+        @apply flex cursor-pointer items-center gap-4 rounded-xl bg-white/50 px-5 py-4 transition hover:bg-moss/5;
+        border: 1px solid rgba(28, 43, 40, 0.08);
+    }
+
+    .option-card:hover {
+        border-color: rgba(45, 90, 74, 0.3);
+    }
+
+    .option-card:has(input:checked) {
+        @apply bg-moss/10 ring-1 ring-moss;
+        border-color: theme('colors.moss.DEFAULT');
+    }
+
+    .stagger-1 { animation-delay: 0.05s; }
+    .stagger-2 { animation-delay: 0.12s; }
+    .stagger-3 { animation-delay: 0.19s; }
+    .stagger-4 { animation-delay: 0.26s; }
+    .stagger-5 { animation-delay: 0.33s; }
+}
