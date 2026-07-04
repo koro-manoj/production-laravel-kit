@@ -110,6 +110,10 @@ curl -X POST http://localhost:8000/api/v1/quizzes/health-assessment/sessions \
 | pharmacy@example.com | password | Pharmacy |
 | patient@example.com | password | Patient |
 
+## Live demo
+
+**URL:** _Pending deployment_ — [GitHub](https://github.com/koro-manoj/production-laravel-kit)
+
 ## License
 
 MIT
