@@ -1,6 +1,6 @@
 # Production Laravel Kit
 
-Modular Laravel 11 showcase: branching quiz funnel, Stripe sandbox checkout with database-stored credentials, Filament admin, Sanctum mobile API, and Horizon-backed queues.
+Laravel 11 app with branching quiz funnel, Stripe checkout, Filament admin, Sanctum API, and Horizon queues.
 
 ## Modules
 
@@ -96,12 +96,6 @@ curl -X POST http://localhost:8000/api/v1/quizzes/health-assessment/sessions \
   -H "Accept: application/json"
 ```
 
-## Documentation
-
-- [Architecture](docs/architecture.md)
-- [Deployment checklist](docs/DEPLOYMENT.md)
-- [Reliability & debug playbook](docs/reliability-debug-playbook.md)
-
 ## Default users
 
 | Email | Password | Role |
@@ -113,7 +107,7 @@ curl -X POST http://localhost:8000/api/v1/quizzes/health-assessment/sessions \
 
 ## Live demo
 
-**URL:** _Pending deployment_ — [GitHub](https://github.com/koro-manoj/production-laravel-kit)
+Pending deployment.
 
 ## License
 

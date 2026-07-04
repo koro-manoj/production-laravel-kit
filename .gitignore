@@ -24,3 +24,4 @@ yarn-error.log
 
 # Local IDE config (not for public repos)
 .cursor/
+docs/
