@@ -25,14 +25,16 @@ class CheckoutFlow extends Component
 
     public ?string $errorMessage = null;
 
-    public function mount(Product $product, ?string $session = null): void
+    public function mount(Product $product): void
     {
         abort_unless($product->is_active, 404);
 
         $this->product = $product;
 
-        if ($session !== null) {
-            $this->quizSession = QuizSession::query()->find($session);
+        $sessionId = request()->query('session');
+
+        if (is_string($sessionId) && $sessionId !== '') {
+            $this->quizSession = QuizSession::query()->find($sessionId);
         }
 
         $user = Auth::user();
@@ -63,7 +65,7 @@ class CheckoutFlow extends Component
 
             $payment = $checkout->startCheckout(
                 $order,
-                route('checkout.success', $order),
+                route('checkout.success', $order).'?session_id={CHECKOUT_SESSION_ID}',
                 route('checkout.cancel', $order),
             );
 

@@ -10,7 +10,6 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
 
 class ProcessQuizCompletionJob implements ShouldQueue
 {
@@ -35,12 +34,14 @@ class ProcessQuizCompletionJob implements ShouldQueue
             return;
         }
 
-        Log::info('quiz.session.completed', [
-            'session_id' => $session->id,
-            'quiz_id' => $session->quiz_id,
-            'outcome' => $session->outcome_label,
-            'user_id' => $session->user_id,
-            'response_count' => $session->responses->count(),
+        $metadata = $session->metadata ?? [];
+        $metadata['processed_at'] = now()->toIso8601String();
+        $metadata['response_count'] = $session->responses->count();
+        $metadata['outcome_summary'] = $session->outcomeQuestion?->outcome_summary;
+
+        $session->update([
+            'metadata' => $metadata,
+            'completed_at' => $session->completed_at ?? now(),
         ]);
     }
 }

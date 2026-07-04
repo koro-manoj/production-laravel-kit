@@ -10,7 +10,7 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
 use Illuminate\Queue\InteractsWithQueue;
 use Illuminate\Queue\SerializesModels;
-use Illuminate\Support\Facades\Log;
+use App\Mail\OrderReceiptMail;
 use Illuminate\Support\Facades\Mail;
 
 class SendOrderReceiptJob implements ShouldQueue
@@ -34,12 +34,6 @@ class SendOrderReceiptJob implements ShouldQueue
             return;
         }
 
-        Log::info('order.receipt.queued', [
-            'order_reference' => $order->reference,
-            'email' => $order->customer_email,
-            'amount_cents' => $order->amount_cents,
-        ]);
-
-        // Mail delivery is intentionally logged in this showcase; wire Mail::send in production.
+        Mail::to($order->customer_email)->send(new OrderReceiptMail($order));
     }
 }
