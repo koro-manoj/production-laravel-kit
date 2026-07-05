@@ -26,7 +26,8 @@ Route::get('/checkout/cancel/{order}', [CheckoutController::class, 'cancel'])->n
 // Legacy single-product checkout (API compatibility)
 Route::get('/checkout/{product:slug}', CheckoutFlow::class)->name('checkout.show');
 
-// Product finder module (hidden from main nav — available at /finder/{slug})
-Route::get('/finder/{quiz:slug}', QuizFunnel::class)->name('quiz.show');
+// Product finder — SCOPE demo path /quiz/{slug}; /finder kept as alias
+Route::get('/quiz/{quiz:slug}', QuizFunnel::class)->name('quiz.show');
+Route::get('/finder/{quiz:slug}', QuizFunnel::class)->name('quiz.finder');
 
 Route::post('/webhooks/stripe', StripeWebhookController::class)->name('webhooks.stripe');

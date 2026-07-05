@@ -44,8 +44,20 @@ class ProductSeeder extends Seeder
             );
         }
 
+        Product::query()->updateOrCreate(
+            ['slug' => 'consultation-package'],
+            [
+                'name' => 'Consultation Package',
+                'description' => 'One-on-one strategy session with follow-up notes and action plan.',
+                'price_cents' => 9900,
+                'currency' => 'USD',
+                'category' => 'services',
+                'is_active' => true,
+            ]
+        );
+
         Product::query()
-            ->whereIn('slug', ['consultation-package', 'wellness-plan', 'urgent-care-escalation'])
+            ->whereIn('slug', ['wellness-plan', 'urgent-care-escalation'])
             ->update(['is_active' => false]);
     }
 

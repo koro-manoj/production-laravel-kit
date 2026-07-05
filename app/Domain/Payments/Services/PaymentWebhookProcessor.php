@@ -8,6 +8,7 @@ use App\Domain\Payments\Enums\PaymentStatus;
 use App\Domain\Payments\Models\Payment;
 use App\Domain\Payments\Models\PaymentWebhookEvent;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 use Stripe\Event;
 
 class PaymentWebhookProcessor
@@ -47,6 +48,8 @@ class PaymentWebhookProcessor
         $sessionId = $session['id'] ?? null;
 
         if (! is_string($sessionId)) {
+            Log::warning('payments.webhook.checkout_completed_missing_session_id');
+
             return;
         }
 
@@ -55,6 +58,8 @@ class PaymentWebhookProcessor
             ->first();
 
         if ($payment === null) {
+            Log::warning('payments.webhook.payment_not_found', ['session_id' => $sessionId]);
+
             return;
         }
 
