@@ -14,7 +14,12 @@ class Product extends Model
         'slug',
         'name',
         'description',
+        'image_url',
+        'gallery',
+        'category',
+        'badge',
         'price_cents',
+        'compare_at_price_cents',
         'currency',
         'is_active',
     ];
@@ -23,7 +28,43 @@ class Product extends Model
     {
         return [
             'is_active' => 'boolean',
+            'gallery' => 'array',
         ];
+    }
+
+    /** @return list<string> */
+    public function images(): array
+    {
+        $images = [];
+
+        if (is_string($this->image_url) && $this->image_url !== '') {
+            $images[] = $this->resolveImageUrl($this->image_url);
+        }
+
+        foreach ($this->gallery ?? [] as $url) {
+            if (is_string($url) && $url !== '') {
+                $resolved = $this->resolveImageUrl($url);
+                if (! in_array($resolved, $images, true)) {
+                    $images[] = $resolved;
+                }
+            }
+        }
+
+        return $images;
+    }
+
+    public function primaryImageUrl(): ?string
+    {
+        return $this->images()[0] ?? null;
+    }
+
+    private function resolveImageUrl(string $url): string
+    {
+        if (str_starts_with($url, '/')) {
+            return asset($url);
+        }
+
+        return $url;
     }
 
     public function getRouteKeyName(): string

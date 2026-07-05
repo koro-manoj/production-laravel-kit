@@ -6,42 +6,67 @@ namespace Database\Seeders;
 
 use App\Domain\Payments\Models\Product;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\File;
+use RuntimeException;
 
 class ProductSeeder extends Seeder
 {
     public function run(): void
     {
-        Product::query()->updateOrCreate(
-            ['slug' => 'consultation-package'],
-            [
-                'name' => 'Telehealth Consultation',
-                'description' => '30-minute clinician review with care plan summary.',
-                'price_cents' => 7900,
-                'currency' => 'USD',
-                'is_active' => true,
-            ]
-        );
+        $path = database_path('data/northline-catalog.json');
 
-        Product::query()->updateOrCreate(
-            ['slug' => 'wellness-plan'],
-            [
-                'name' => 'Wellness Plan',
-                'description' => 'Personalized supplement and lifestyle recommendations.',
-                'price_cents' => 4900,
-                'currency' => 'USD',
-                'is_active' => true,
-            ]
-        );
+        if (! File::exists($path)) {
+            throw new RuntimeException("Catalog file not found: {$path}");
+        }
 
-        Product::query()->updateOrCreate(
-            ['slug' => 'urgent-care-escalation'],
-            [
-                'name' => 'Urgent Care Escalation',
-                'description' => 'Priority routing to an on-call clinician within 2 hours.',
-                'price_cents' => 12900,
-                'currency' => 'USD',
-                'is_active' => true,
-            ]
-        );
+        $catalog = json_decode(File::get($path), true, 512, JSON_THROW_ON_ERROR);
+
+        foreach ($catalog as $row) {
+            $slug = $row['slug'];
+            $imagePaths = $this->localImagePaths($slug);
+
+            Product::query()->updateOrCreate(
+                ['slug' => $slug],
+                [
+                    'name' => $row['name'],
+                    'description' => $row['description'],
+                    'image_url' => $imagePaths['primary'] ?? $row['image_url'] ?? null,
+                    'gallery' => $imagePaths['gallery'] !== [] ? $imagePaths['gallery'] : ($row['gallery'] ?? []),
+                    'category' => $row['category'],
+                    'badge' => $row['badge'] ?? null,
+                    'price_cents' => (int) $row['price_cents'],
+                    'compare_at_price_cents' => isset($row['compare_at_price_cents'])
+                        ? (int) $row['compare_at_price_cents']
+                        : null,
+                    'currency' => 'USD',
+                    'is_active' => true,
+                ]
+            );
+        }
+
+        Product::query()
+            ->whereIn('slug', ['consultation-package', 'wellness-plan', 'urgent-care-escalation'])
+            ->update(['is_active' => false]);
+    }
+
+    /** @return array{primary: ?string, gallery: list<string>} */
+    private function localImagePaths(string $slug): array
+    {
+        $primary = "/images/products/{$slug}/primary.jpg";
+        $gallery = [];
+
+        for ($i = 1; $i <= 3; $i++) {
+            $gallery[] = "/images/products/{$slug}/gallery-{$i}.jpg";
+        }
+
+        $gallery = array_values(array_filter(
+            $gallery,
+            fn (string $path): bool => file_exists(public_path(ltrim($path, '/')))
+        ));
+
+        return [
+            'primary' => file_exists(public_path(ltrim($primary, '/'))) ? $primary : null,
+            'gallery' => $gallery,
+        ];
     }
 }

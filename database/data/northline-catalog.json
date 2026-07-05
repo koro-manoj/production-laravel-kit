@@ -1,0 +1,182 @@
+[
+    {
+        "slug": "stoneware-mug-set",
+        "name": "Stoneware Mug Set",
+        "description": "Set of four hand-glazed mugs in matte earth tones. Microwave and dishwasher safe.",
+        "category": "home",
+        "badge": null,
+        "price_cents": 4800,
+        "compare_at_price_cents": null,
+        "image_url": "https://images.unsplash.com/photo-1514228742587-6b1558fcca0d?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1544787210-97564f174964?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "merino-wool-throw",
+        "name": "Merino Wool Throw",
+        "description": "Lightweight merino blanket with contrast whipstitch edge. Perfect for sofa or travel.",
+        "category": "home",
+        "badge": "Bestseller",
+        "price_cents": 12900,
+        "compare_at_price_cents": 14900,
+        "image_url": "https://images.unsplash.com/photo-1555041469-a586c61ea9bc?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1522771739844-6a9f6d5f14af?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1631049307264-da0ec9d70304?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1616486338812-3dadae4b4ace?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "pour-over-kit",
+        "name": "Pour-Over Kit",
+        "description": "Ceramic dripper, glass carafe, and filters — everything for a slow morning ritual.",
+        "category": "home",
+        "badge": null,
+        "price_cents": 5400,
+        "compare_at_price_cents": 6200,
+        "image_url": "https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1511920170033-f8396924c10b?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1509042239860-f550ce710b93?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "linen-napkin-set",
+        "name": "Linen Napkin Set",
+        "description": "Six washed linen napkins in natural oat. Softens with every wash.",
+        "category": "home",
+        "badge": null,
+        "price_cents": 3600,
+        "compare_at_price_cents": null,
+        "image_url": "https://images.unsplash.com/photo-1616628188855-ae4ec711ffd2?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1615876234686-fb9d394c0dbb?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "beeswax-taper-candles",
+        "name": "Beeswax Taper Candles",
+        "description": "Pair of hand-dipped tapers with a warm honey scent. Burns clean for 12+ hours.",
+        "category": "home",
+        "badge": "New",
+        "price_cents": 2800,
+        "compare_at_price_cents": null,
+        "image_url": "https://images.unsplash.com/photo-1602600779156-761a34d50446?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1603000380976-8f137d663a1e?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1608181835417-9fb5a1a1352a?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1602874801006-4f124ca4c8b0?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "oak-desk-organizer",
+        "name": "Oak Desk Organizer",
+        "description": "Solid oak tray with compartments for pens, cards, and phone. Oiled finish.",
+        "category": "desk",
+        "badge": "New",
+        "price_cents": 6800,
+        "compare_at_price_cents": null,
+        "image_url": "https://images.unsplash.com/photo-1593642532973-d19b956a7337?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1487017159827-4e03ece41e83?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1518455027359-f3f816d0259f?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1524758637874-b93c569e404c?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "leather-mousepad",
+        "name": "Leather Mouse Pad",
+        "description": "Vegetable-tanned leather desk pad with stitched edge. Ages to a rich patina.",
+        "category": "desk",
+        "badge": null,
+        "price_cents": 4200,
+        "compare_at_price_cents": null,
+        "image_url": "https://images.unsplash.com/photo-1611462616306-cd8176265e61?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1593640408182-31c70c8268f5?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1586953208448-b95a79798f07?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "brass-desk-lamp",
+        "name": "Brass Desk Lamp",
+        "description": "Adjustable arm lamp with dimmable LED bulb and linen shade.",
+        "category": "desk",
+        "badge": null,
+        "price_cents": 11800,
+        "compare_at_price_cents": 13500,
+        "image_url": "https://images.unsplash.com/photo-1507473885765-e6ed168f782e?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1513506003901-1e6a229e2d15?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1565814329452-e1efa11c5b89?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1524484487475-2a2c5f4b7b7a?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "canvas-weekender",
+        "name": "Canvas Weekender",
+        "description": "Waxed canvas duffle with bridle leather handles and brass hardware.",
+        "category": "outdoor",
+        "badge": null,
+        "price_cents": 8900,
+        "compare_at_price_cents": null,
+        "image_url": "https://images.unsplash.com/photo-1553062407-98eeb64c6a62?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1548036328-c9fa89d128fa?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1622560481652-06492b178fc9?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1590874103328-eac38a683ce7?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "insulated-travel-mug",
+        "name": "Insulated Travel Mug",
+        "description": "Double-wall stainless steel mug. Keeps drinks hot for 6 hours, cold for 12.",
+        "category": "outdoor",
+        "badge": "Bestseller",
+        "price_cents": 3400,
+        "compare_at_price_cents": null,
+        "image_url": "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1602143407151-7111542de6e8?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1514228742587-6b1558fcca0d?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1515823064-df6fc1921729?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "packable-rain-jacket",
+        "name": "Packable Rain Jacket",
+        "description": "Lightweight shell that packs into its own pocket. Waterproof, breathable.",
+        "category": "outdoor",
+        "badge": null,
+        "price_cents": 9800,
+        "compare_at_price_cents": 11200,
+        "image_url": "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-1544022613-e87ca75a784a?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?w=900&q=85&fit=crop"
+        ]
+    },
+    {
+        "slug": "merino-base-layer",
+        "name": "Merino Base Layer",
+        "description": "Fine-gauge merino tee for layering on trail or commute. Odor-resistant.",
+        "category": "outdoor",
+        "badge": null,
+        "price_cents": 7200,
+        "compare_at_price_cents": null,
+        "image_url": "https://images.unsplash.com/photo-1434389677669-e08b4cac3105?w=900&q=85&fit=crop",
+        "gallery": [
+            "https://images.unsplash.com/photo-152157735294265-787ce0649432?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?w=900&q=85&fit=crop",
+            "https://images.unsplash.com/photo-1618354691373-d851c5c3d990?w=900&q=85&fit=crop"
+        ]
+    }
+]

@@ -33,7 +33,9 @@ class CheckoutController extends Controller
             }
         }
 
-        return view('checkout.success', compact('order'));
+        return view('checkout.success', [
+            'order' => $order->load(['product', 'items', 'latestPayment']),
+        ]);
     }
 
     public function cancel(Order $order): View

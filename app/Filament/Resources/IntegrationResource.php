@@ -4,7 +4,9 @@ declare(strict_types=1);
 
 namespace App\Filament\Resources;
 
+use App\Domain\Auth\Enums\RoleName;
 use App\Domain\Integrations\Models\Integration;
+use App\Filament\Concerns\ChecksFilamentRoles;
 use App\Filament\Resources\IntegrationResource\Pages;
 use Filament\Forms;
 use Filament\Forms\Form;
@@ -14,6 +16,8 @@ use Filament\Tables\Table;
 
 class IntegrationResource extends Resource
 {
+    use ChecksFilamentRoles;
+
     protected static ?string $model = Integration::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-key';
@@ -21,6 +25,11 @@ class IntegrationResource extends Resource
     protected static ?string $navigationGroup = 'Platform';
 
     protected static ?int $navigationSort = 1;
+
+    public static function canViewAny(): bool
+    {
+        return self::userHasAnyRole([RoleName::Admin]);
+    }
 
     public static function form(Form $form): Form
     {
@@ -62,7 +71,10 @@ class IntegrationResource extends Resource
                 Tables\Columns\TextColumn::make('provider')->badge(),
                 Tables\Columns\IconColumn::make('is_sandbox')->boolean()->label('Sandbox'),
                 Tables\Columns\IconColumn::make('is_active')->boolean()->label('Active'),
-                Tables\Columns\TextColumn::make('updated_at')->dateTime()->sortable(),
+                Tables\Columns\TextColumn::make('updated_at')
+                    ->label('Updated')
+                    ->formatStateUsing(fn ($state) => $state?->format('M j, Y g:i A'))
+                    ->sortable(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

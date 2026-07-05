@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 use App\Http\Controllers\Api\AuthController;
 use App\Http\Controllers\Api\CheckoutController;
+use App\Http\Controllers\Api\OrderController;
 use App\Http\Controllers\Api\QuizController;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +23,8 @@ Route::prefix('v1')->group(function () {
 
         Route::get('/products', [CheckoutController::class, 'products']);
         Route::post('/checkout/{product:slug}', [CheckoutController::class, 'create']);
+
+        Route::get('/orders', [OrderController::class, 'index']);
+        Route::get('/orders/{order:reference}', [OrderController::class, 'show']);
     });
 });

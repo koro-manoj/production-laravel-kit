@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace App\Domain\Payments\Services;
 
+use App\Domain\Commerce\Models\OrderItem;
 use App\Domain\Integrations\Enums\IntegrationProvider;
 use App\Domain\Integrations\Services\IntegrationCredentialService;
 use App\Domain\Payments\Enums\PaymentStatus;
@@ -12,6 +13,7 @@ use App\Domain\Payments\Models\Payment;
 use App\Domain\Payments\Models\Product;
 use App\Domain\Quiz\Models\QuizSession;
 use App\Models\User;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Str;
 use Stripe\Checkout\Session as StripeCheckoutSession;
 use Stripe\StripeClient;
@@ -45,16 +47,69 @@ class StripeCheckoutService
         ]);
     }
 
+    /**
+     * @param  Collection<int, array{product: Product, quantity: int}>  $lines
+     */
+    public function createOrderFromCart(
+        Collection $lines,
+        ?User $user,
+        string $customerEmail,
+        string $customerName,
+    ): Order {
+        $amountCents = $lines->sum(
+            fn (array $line): int => $line['product']->price_cents * $line['quantity']
+        );
+
+        /** @var Product $primary */
+        $primary = $lines->first()['product'];
+
+        $order = Order::query()->create([
+            'reference' => 'NL-'.Str::upper(Str::random(8)),
+            'user_id' => $user?->id,
+            'product_id' => $primary->id,
+            'amount_cents' => $amountCents,
+            'currency' => $primary->currency,
+            'status' => 'pending',
+            'customer_email' => $customerEmail,
+            'customer_name' => $customerName,
+            'metadata' => [
+                'source' => 'cart',
+                'item_count' => $lines->count(),
+            ],
+        ]);
+
+        foreach ($lines as $line) {
+            OrderItem::query()->create([
+                'order_id' => $order->id,
+                'product_id' => $line['product']->id,
+                'quantity' => $line['quantity'],
+                'unit_price_cents' => $line['product']->price_cents,
+                'product_name' => $line['product']->name,
+            ]);
+        }
+
+        return $order->load('items');
+    }
+
     public function startCheckout(Order $order, string $successUrl, string $cancelUrl): Payment
     {
         $stripe = new StripeClient($this->credentials->secretKey(IntegrationProvider::Stripe));
 
-        $session = $stripe->checkout->sessions->create([
-            'mode' => 'payment',
-            'success_url' => $successUrl,
-            'cancel_url' => $cancelUrl,
-            'customer_email' => $order->customer_email,
-            'line_items' => [[
+        $order->loadMissing(['items.product', 'product']);
+
+        $lineItems = $order->items->isNotEmpty()
+            ? $order->items->map(fn (OrderItem $item): array => [
+                'quantity' => $item->quantity,
+                'price_data' => [
+                    'currency' => strtolower($order->currency),
+                    'unit_amount' => $item->unit_price_cents,
+                    'product_data' => [
+                        'name' => $item->product_name,
+                        'description' => $item->product?->description,
+                    ],
+                ],
+            ])->all()
+            : [[
                 'quantity' => 1,
                 'price_data' => [
                     'currency' => strtolower($order->currency),
@@ -64,7 +119,14 @@ class StripeCheckoutService
                         'description' => $order->product->description,
                     ],
                 ],
-            ]],
+            ]];
+
+        $session = $stripe->checkout->sessions->create([
+            'mode' => 'payment',
+            'success_url' => $successUrl,
+            'cancel_url' => $cancelUrl,
+            'customer_email' => $order->customer_email,
+            'line_items' => $lineItems,
             'metadata' => [
                 'order_reference' => $order->reference,
                 'order_id' => (string) $order->id,
