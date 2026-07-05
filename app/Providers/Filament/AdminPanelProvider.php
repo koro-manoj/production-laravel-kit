@@ -44,6 +44,7 @@ class AdminPanelProvider extends PanelProvider
             ->id('admin')
             ->path('admin')
             ->login(Login::class)
+            ->darkMode(false)
             ->brandName('Northline Admin')
             ->brandLogo(fn () => view('filament.logo'))
             ->colors([

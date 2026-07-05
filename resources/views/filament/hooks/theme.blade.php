@@ -4,6 +4,7 @@
         width: auto !important;
     }
 
+    /* ── Login (simple layout) ── */
     .fi-simple-layout {
         background: linear-gradient(160deg, #0f1916 0%, #143028 45%, #1a3d32 100%) !important;
     }
@@ -21,28 +22,9 @@
         padding: 2.5rem 2rem !important;
     }
 
-    .fi-simple-header {
-        margin-bottom: 0.25rem;
-    }
-
     .fi-simple-header:empty {
         display: none;
         margin: 0;
-    }
-
-    .fi-simple-header-heading {
-        font-family: Fraunces, Georgia, serif !important;
-        font-size: 1.75rem !important;
-        font-weight: 600 !important;
-        letter-spacing: -0.02em;
-        color: #faf7f2 !important;
-    }
-
-    .fi-simple-header-subheading {
-        max-width: 20rem;
-        margin-inline: auto;
-        line-height: 1.55;
-        color: rgba(250, 247, 242, 0.55) !important;
     }
 
     .nl-login-brand {
@@ -158,34 +140,173 @@
         border: 1px solid rgba(255, 255, 255, 0.12) !important;
         box-shadow: 0 4px 14px rgba(196, 104, 64, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.15) !important;
         font-weight: 600 !important;
-        letter-spacing: 0.01em;
     }
 
     .fi-simple-page .fi-btn-color-primary:hover {
         background: linear-gradient(180deg, #e89570 0%, #d07448 100%) !important;
     }
 
-    .fi-sidebar {
-        background: linear-gradient(180deg, #faf7f2 0%, #f4f0e8 100%) !important;
-        border-right: 1px solid rgba(21, 34, 32, 0.06) !important;
+    /* ── Admin shell (light Northline theme) ── */
+    .fi-body {
+        background: #f4f0e8 !important;
+    }
+
+    .fi-layout {
+        background: #f4f0e8 !important;
+    }
+
+    .fi-main-ctn {
+        background: #f4f0e8 !important;
     }
 
     .fi-topbar {
-        background: rgba(250, 247, 242, 0.9) !important;
+        background: rgba(250, 247, 242, 0.95) !important;
         backdrop-filter: blur(16px);
+        border-bottom: 1px solid rgba(21, 34, 32, 0.08) !important;
+        box-shadow: 0 1px 0 rgba(255, 255, 255, 0.6) !important;
+    }
+
+    .fi-topbar .fi-icon-btn {
+        color: #3d524e !important;
+    }
+
+    .fi-sidebar {
+        background: linear-gradient(180deg, #faf7f2 0%, #f0ebe2 100%) !important;
+        border-right: 1px solid rgba(21, 34, 32, 0.08) !important;
+        box-shadow: 1px 0 0 rgba(255, 255, 255, 0.5) !important;
+    }
+
+    .fi-sidebar-header {
+        background: #faf7f2 !important;
         border-bottom: 1px solid rgba(21, 34, 32, 0.06) !important;
+        box-shadow: none !important;
+    }
+
+    .fi-sidebar-group-label {
+        color: #6b807b !important;
+        font-size: 0.6875rem !important;
+        font-weight: 600 !important;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+    }
+
+    .fi-sidebar-group-icon {
+        color: #6b807b !important;
+    }
+
+    .fi-sidebar-item-label {
+        color: #3d524e !important;
+        font-weight: 500 !important;
+    }
+
+    .fi-sidebar-item-icon {
+        color: #6b807b !important;
+    }
+
+    .fi-sidebar-item-button:hover {
+        background: rgba(31, 77, 60, 0.07) !important;
+    }
+
+    .fi-sidebar-item-button:hover .fi-sidebar-item-label,
+    .fi-sidebar-item-button:hover .fi-sidebar-item-icon {
+        color: #1f4d3c !important;
+    }
+
+    .fi-sidebar-item.fi-active .fi-sidebar-item-button {
+        background: rgba(31, 77, 60, 0.12) !important;
+    }
+
+    .fi-sidebar-item.fi-active .fi-sidebar-item-label {
+        color: #1f4d3c !important;
+        font-weight: 600 !important;
+    }
+
+    .fi-sidebar-item.fi-active .fi-sidebar-item-icon {
+        color: #1f4d3c !important;
+    }
+
+    .fi-header-heading,
+    .fi-header .fi-header-heading {
+        font-family: Fraunces, Georgia, serif !important;
+        font-weight: 600 !important;
+        letter-spacing: -0.02em;
+        color: #152220 !important;
+    }
+
+    .fi-page-header-heading {
+        font-family: Fraunces, Georgia, serif !important;
+        color: #152220 !important;
     }
 
     .fi-wi-stats-overview-stat {
+        background: #faf7f2 !important;
+        border: 1px solid rgba(21, 34, 32, 0.08) !important;
         border-radius: 1rem !important;
-        border: 1px solid rgba(21, 34, 32, 0.06) !important;
+        box-shadow: 0 1px 2px rgba(21, 34, 32, 0.04), 0 8px 24px rgba(21, 34, 32, 0.04) !important;
+    }
+
+    .fi-wi-stats-overview-stat-value {
+        color: #152220 !important;
+        font-weight: 700 !important;
+    }
+
+    .fi-wi-stats-overview-stat-label {
+        color: #3d524e !important;
+        font-weight: 600 !important;
+    }
+
+    .fi-wi-stats-overview-stat-description {
+        color: #6b807b !important;
+    }
+
+    .fi-section,
+    .fi-wi-table .fi-ta-ctn,
+    .fi-wi-table .fi-section-content-ctn {
+        background: #faf7f2 !important;
+        border: 1px solid rgba(21, 34, 32, 0.08) !important;
+        border-radius: 1rem !important;
+        box-shadow: 0 1px 2px rgba(21, 34, 32, 0.04) !important;
+    }
+
+    .fi-wi-table .fi-ta-header-cell,
+    .fi-ta-header-cell {
+        color: #3d524e !important;
+        font-weight: 600 !important;
+        background: rgba(244, 240, 232, 0.8) !important;
+    }
+
+    .fi-ta-cell {
+        color: #152220 !important;
+    }
+
+    .fi-ta-text-item {
+        color: #152220 !important;
+    }
+
+    .fi-ta-search-field .fi-input-wrp {
+        background: #fff !important;
+        border-color: rgba(21, 34, 32, 0.12) !important;
+    }
+
+    .fi-badge {
+        font-weight: 600 !important;
+        font-size: 0.75rem !important;
     }
 
     .fi-btn-color-primary:not(.fi-simple-page .fi-btn-color-primary) {
         background: #1f4d3c !important;
+        border: 1px solid rgba(255, 255, 255, 0.1) !important;
     }
 
     .fi-btn-color-primary:not(.fi-simple-page .fi-btn-color-primary):hover {
         background: #2a6650 !important;
+    }
+
+    .fi-breadcrumbs-item-label {
+        color: #6b807b !important;
+    }
+
+    .fi-breadcrumbs-item-label.fi-active {
+        color: #152220 !important;
     }
 </style>
