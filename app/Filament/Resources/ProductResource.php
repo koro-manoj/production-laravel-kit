@@ -90,7 +90,7 @@ class ProductResource extends Resource
                 Tables\Columns\TextColumn::make('badge'),
                 Tables\Columns\TextColumn::make('price_cents')
                     ->label('Price')
-                    ->formatStateUsing(fn (int $state, Product $record): string => '$'.number_format($state / 100, 2).' '.strtoupper($record->currency)),
+                    ->formatStateUsing(fn (int $state, Product $record): string => money_format_cents($state, $record->currency)),
                 Tables\Columns\IconColumn::make('is_active')->boolean(),
                 Tables\Columns\TextColumn::make('updated_at')
                     ->label('Updated')

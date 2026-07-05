@@ -6,7 +6,6 @@ namespace App\Domain\Payments\Models;
 
 use App\Domain\Commerce\Models\OrderItem;
 use App\Domain\Quiz\Models\QuizSession;
-use App\Models\User;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
@@ -62,6 +61,26 @@ class Order extends Model
     public function items(): HasMany
     {
         return $this->hasMany(OrderItem::class);
+    }
+
+    public function itemsSummary(): string
+    {
+        $this->loadMissing('items', 'product');
+
+        if ($this->items->isNotEmpty()) {
+            return $this->items
+                ->map(fn (OrderItem $item): string => $item->quantity > 1
+                    ? "{$item->product_name} × {$item->quantity}"
+                    : $item->product_name)
+                ->join(', ');
+        }
+
+        return $this->product?->name ?? '—';
+    }
+
+    public function formattedAmount(): string
+    {
+        return money_format_cents($this->amount_cents, $this->currency);
     }
 
     public function getRouteKeyName(): string

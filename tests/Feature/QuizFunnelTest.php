@@ -22,15 +22,15 @@ class QuizFunnelTest extends TestCase
 
         $session = $funnel->startSession($quiz);
         $question = $session->currentQuestion;
-        $routineOption = $question->options()->where('value', 'routine')->firstOrFail();
+        $homeOption = $question->options()->where('value', 'home')->firstOrFail();
 
-        $session = $funnel->submitAnswer($session, $question, $routineOption);
+        $session = $funnel->submitAnswer($session, $question, $homeOption);
         $question = $session->currentQuestion;
-        $shortOption = $question->options()->where('value', 'short')->firstOrFail();
+        $relaxOption = $question->options()->where('value', 'relax')->firstOrFail();
 
-        $session = $funnel->submitAnswer($session, $question, $shortOption);
+        $session = $funnel->submitAnswer($session, $question, $relaxOption);
 
         $this->assertSame('completed', $session->status->value);
-        $this->assertSame('Wellness support recommended', $session->outcome_label);
+        $this->assertSame('Cozy home essentials', $session->outcome_label);
     }
 }

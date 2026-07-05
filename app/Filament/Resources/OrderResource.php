@@ -32,17 +32,20 @@ class OrderResource extends Resource
     public static function table(Table $table): Table
     {
         return $table
+            ->modifyQueryUsing(fn ($query) => $query->with(['items', 'product']))
             ->columns([
                 Tables\Columns\TextColumn::make('reference')->searchable(),
-                Tables\Columns\TextColumn::make('product.name'),
+                Tables\Columns\TextColumn::make('itemsSummary')
+                    ->label('Items')
+                    ->state(fn (Order $record): string => $record->itemsSummary()),
                 Tables\Columns\TextColumn::make('customer_email'),
                 Tables\Columns\TextColumn::make('amount_cents')
                     ->label('Amount')
-                    ->formatStateUsing(fn (int $state, Order $record): string => '$'.number_format($state / 100, 2).' '.strtoupper($record->currency)),
+                    ->formatStateUsing(fn (int $state, Order $record): string => money_format_cents($state, $record->currency)),
                 Tables\Columns\TextColumn::make('status')->badge(),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Created')
-                    ->formatStateUsing(fn ($state) => $state?->format('M j, Y g:i A'))
+                    ->since()
                     ->sortable(),
             ])
             ->defaultSort('created_at', 'desc')
@@ -58,16 +61,29 @@ class OrderResource extends Resource
                 ->schema([
                     Infolists\Components\TextEntry::make('reference'),
                     Infolists\Components\TextEntry::make('status')->badge(),
-                    Infolists\Components\TextEntry::make('product.name')->label('Product'),
                     Infolists\Components\TextEntry::make('amount_cents')
                         ->label('Amount')
-                        ->formatStateUsing(fn (int $state, Order $record): string => '$'.number_format($state / 100, 2).' '.strtoupper($record->currency)),
+                        ->formatStateUsing(fn (int $state, Order $record): string => money_format_cents($state, $record->currency)),
                     Infolists\Components\TextEntry::make('customer_name')->label('Customer'),
                     Infolists\Components\TextEntry::make('customer_email')->label('Email'),
                     Infolists\Components\TextEntry::make('created_at')
                         ->label('Created')
                         ->formatStateUsing(fn ($state) => $state?->format('M j, Y g:i A')),
                 ])->columns(2),
+            Infolists\Components\Section::make('Line items')
+                ->schema([
+                    Infolists\Components\RepeatableEntry::make('items')
+                        ->label('')
+                        ->schema([
+                            Infolists\Components\TextEntry::make('product_name')->label('Product'),
+                            Infolists\Components\TextEntry::make('quantity'),
+                            Infolists\Components\TextEntry::make('unit_price_cents')
+                                ->label('Unit price')
+                                ->formatStateUsing(fn (int $state): string => money_format_cents($state, config('store.currency', 'USD'))),
+                        ])
+                        ->columns(3),
+                ])
+                ->visible(fn (Order $record): bool => $record->items()->exists()),
             Infolists\Components\Section::make('Payment')
                 ->schema([
                     Infolists\Components\TextEntry::make('latestPayment.status')

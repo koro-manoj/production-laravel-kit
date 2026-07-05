@@ -9,7 +9,7 @@
     <div class="nl-login-brand">
         <div class="nl-login-brand-row">
             <span class="nl-login-mark" aria-hidden="true">N</span>
-            <span class="nl-login-name">Northline</span>
+            <span class="nl-login-name">{{ config('store.name') }}</span>
         </div>
         <span class="nl-login-badge">Admin console</span>
     </div>

@@ -16,81 +16,82 @@ class QuizSeeder extends Seeder
         $quiz = Quiz::query()->updateOrCreate(
             ['slug' => 'health-assessment'],
             [
-                'title' => 'Health Assessment',
-                'description' => 'A branching intake funnel that routes patients to the right care path.',
+                'title' => 'Gift Finder',
+                'description' => 'A short product-matching quiz that routes shoppers to curated Northline picks.',
                 'is_active' => true,
             ]
         );
 
         $q1 = QuizQuestion::query()->updateOrCreate(
-            ['quiz_id' => $quiz->id, 'key' => 'symptoms'],
+            ['quiz_id' => $quiz->id, 'key' => 'recipient'],
             [
-                'prompt' => 'What best describes your current symptoms?',
-                'help_text' => 'Choose the option that matches your primary concern today.',
+                'prompt' => 'Who are you shopping for?',
+                'help_text' => 'We will tailor recommendations to the right collection.',
                 'sort_order' => 1,
             ]
         );
 
-        $q2Routine = QuizQuestion::query()->updateOrCreate(
-            ['quiz_id' => $quiz->id, 'key' => 'routine_duration'],
+        $q2Home = QuizQuestion::query()->updateOrCreate(
+            ['quiz_id' => $quiz->id, 'key' => 'home_style'],
             [
-                'prompt' => 'How long have you noticed these routine symptoms?',
+                'prompt' => 'Which home ritual matters most?',
                 'sort_order' => 2,
             ]
         );
 
-        $q2Urgent = QuizQuestion::query()->updateOrCreate(
-            ['quiz_id' => $quiz->id, 'key' => 'urgent_severity'],
+        $q2Desk = QuizQuestion::query()->updateOrCreate(
+            ['quiz_id' => $quiz->id, 'key' => 'desk_style'],
             [
-                'prompt' => 'Are you experiencing severe pain, chest pressure, or difficulty breathing?',
+                'prompt' => 'What does their workspace need most?',
                 'sort_order' => 3,
             ]
         );
 
-        $outcomeWellness = QuizQuestion::query()->updateOrCreate(
-            ['quiz_id' => $quiz->id, 'key' => 'outcome_wellness'],
+        $outcomeHome = QuizQuestion::query()->updateOrCreate(
+            ['quiz_id' => $quiz->id, 'key' => 'outcome_home'],
             [
-                'prompt' => 'Wellness path',
+                'prompt' => 'Home & Living path',
                 'is_terminal' => true,
-                'outcome_label' => 'Wellness support recommended',
-                'outcome_summary' => 'Your responses suggest lifestyle adjustments and a structured wellness plan would be a strong first step.',
-                'recommended_product_cents' => 4900,
+                'outcome_label' => 'Cozy home essentials',
+                'outcome_summary' => 'Soft textures and everyday rituals — start with throws, mugs, and warm lighting.',
+                'recommended_product_cents' => null,
                 'sort_order' => 10,
             ]
         );
 
-        $outcomeConsult = QuizQuestion::query()->updateOrCreate(
-            ['quiz_id' => $quiz->id, 'key' => 'outcome_consult'],
+        $outcomeDesk = QuizQuestion::query()->updateOrCreate(
+            ['quiz_id' => $quiz->id, 'key' => 'outcome_desk'],
             [
-                'prompt' => 'Consultation path',
+                'prompt' => 'Desk & Office path',
                 'is_terminal' => true,
-                'outcome_label' => 'Clinician consultation recommended',
-                'outcome_summary' => 'Based on duration and symptom pattern, a telehealth consultation will help clarify next steps.',
-                'recommended_product_cents' => 7900,
+                'outcome_label' => 'Focused desk setup',
+                'outcome_summary' => 'Organizers, lamps, and tools that keep a workspace calm and intentional.',
+                'recommended_product_cents' => null,
                 'sort_order' => 11,
             ]
         );
 
-        $outcomeUrgent = QuizQuestion::query()->updateOrCreate(
-            ['quiz_id' => $quiz->id, 'key' => 'outcome_urgent'],
+        $outcomeTravel = QuizQuestion::query()->updateOrCreate(
+            ['quiz_id' => $quiz->id, 'key' => 'outcome_travel'],
             [
-                'prompt' => 'Urgent path',
+                'prompt' => 'Travel & Outdoor path',
                 'is_terminal' => true,
-                'outcome_label' => 'Priority escalation recommended',
-                'outcome_summary' => 'Your answers indicate symptoms that should be reviewed urgently by a clinician.',
-                'recommended_product_cents' => 12900,
+                'outcome_label' => 'Ready to go',
+                'outcome_summary' => 'Packable, durable goods for commuters and weekend trips.',
+                'recommended_product_cents' => null,
                 'sort_order' => 12,
             ]
         );
 
-        $this->seedOption($q1, 'Mild or routine symptoms', 'routine', 1, $q2Routine);
-        $this->seedOption($q1, 'Concerning or worsening symptoms', 'urgent', 2, $q2Urgent);
+        $this->seedOption($q1, 'Homebody or host', 'home', 1, $q2Home);
+        $this->seedOption($q1, 'Remote worker or student', 'desk', 2, $q2Desk);
+        $this->seedOption($q1, 'Traveler or commuter', 'travel', 3, $outcomeTravel);
 
-        $this->seedOption($q2Routine, 'Less than two weeks', 'short', 1, $outcomeWellness);
-        $this->seedOption($q2Routine, 'More than two weeks', 'long', 2, $outcomeConsult);
+        $this->seedOption($q2Home, 'Evening unwind', 'relax', 1, $outcomeHome);
+        $this->seedOption($q2Home, 'Weekend hosting', 'host', 2, $outcomeHome);
 
-        $this->seedOption($q2Urgent, 'Yes — severe or alarming symptoms', 'yes', 1, $outcomeUrgent);
-        $this->seedOption($q2Urgent, 'No — manageable but concerning', 'no', 2, $outcomeConsult);
+        $this->seedOption($q2Desk, 'Clear the clutter', 'organize', 1, $outcomeDesk);
+        $this->seedOption($q2Desk, 'Better lighting', 'light', 2, $outcomeDesk);
 
         $quiz->update(['entry_question_id' => $q1->id]);
     }

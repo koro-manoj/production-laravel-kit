@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Domain\Auth\Support\AdminBootstrap;
 use App\Domain\Commerce\Services\CartService;
 use App\Domain\Commerce\Support\CatalogBootstrap;
 use App\Http\Livewire\AddToCart;
@@ -25,6 +26,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot(): void
     {
         CatalogBootstrap::seedIfEmpty();
+        AdminBootstrap::seedIfMissing();
 
         Livewire::component('add-to-cart', AddToCart::class);
 

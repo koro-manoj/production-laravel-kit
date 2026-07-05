@@ -38,7 +38,7 @@ class PaymentResource extends Resource
                 Tables\Columns\TextColumn::make('status')->badge(),
                 Tables\Columns\TextColumn::make('amount_cents')
                     ->label('Amount')
-                    ->formatStateUsing(fn (int $state, Payment $record): string => '$'.number_format($state / 100, 2).' '.strtoupper($record->currency)),
+                    ->formatStateUsing(fn (int $state, Payment $record): string => money_format_cents($state, $record->currency)),
                 Tables\Columns\TextColumn::make('stripe_checkout_session_id')->label('Session')->toggleable(isToggledHiddenByDefault: true),
                 Tables\Columns\TextColumn::make('paid_at')
                     ->label('Paid')

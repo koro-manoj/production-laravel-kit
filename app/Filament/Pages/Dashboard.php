@@ -6,6 +6,7 @@ namespace App\Filament\Pages;
 
 use App\Filament\Widgets\OverviewStatsWidget;
 use App\Filament\Widgets\RecentOrdersWidget;
+use App\Filament\Widgets\RecentProductsWidget;
 use App\Filament\Widgets\RecentQuizSessionsWidget;
 use Filament\Pages\Dashboard as BaseDashboard;
 
@@ -18,6 +19,7 @@ class Dashboard extends BaseDashboard
         return [
             OverviewStatsWidget::class,
             RecentOrdersWidget::class,
+            RecentProductsWidget::class,
             RecentQuizSessionsWidget::class,
         ];
     }
