@@ -37,6 +37,7 @@
             "Database\\Seeders\\": "database/seeders/"
         },
         "files": [
+            "bootstrap/intl-polyfill.php",
             "app/Support/helpers.php"
         ]
     },
