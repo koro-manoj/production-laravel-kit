@@ -88,7 +88,7 @@ Domain-driven layout under `app/Domain/`. Each module owns models, services, and
 
 ## Requirements
 
-- PHP 8.2+ with `pdo`, `mbstring`, `openssl`, `intl` (Filament)
+- PHP 8.2+ with `pdo`, `mbstring`, `openssl`, `intl` (Filament). Homebrew PHP 8.4 is built without `intl` — use PHP 8.2 locally (`brew link php@8.2 --force --overwrite`) or run `composer install` as documented below.
 - Composer 2
 - Node 20+ (Vite + Tailwind)
 - Redis (queues / Horizon)
@@ -99,7 +99,8 @@ Domain-driven layout under `app/Domain/`. Each module owns models, services, and
 ```bash
 git clone <repo-url> production-laravel-kit
 cd production-laravel-kit
-composer install --ignore-platform-req=ext-intl   # if intl missing locally
+composer install --ignore-platform-req=ext-intl   # required on Homebrew PHP 8.4 (no intl)
+# Or switch to PHP 8.2: brew link php@8.2 --force --overwrite && composer install
 cp .env.example .env
 php artisan key:generate
 ```

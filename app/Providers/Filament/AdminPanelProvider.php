@@ -46,7 +46,6 @@ class AdminPanelProvider extends PanelProvider
             ->login(Login::class)
             ->brandName('Northline Admin')
             ->brandLogo(fn () => view('filament.logo'))
-            ->brandLogoHeight('2.25rem')
             ->colors([
                 'primary' => Color::hex('#2d5a4a'),
                 'gray' => Color::Slate,

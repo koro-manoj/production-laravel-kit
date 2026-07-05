@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace App\Filament\Pages\Auth;
 
 use Filament\Pages\Auth\Login as BaseLogin;
+use Filament\Support\Enums\MaxWidth;
 
 class Login extends BaseLogin
 {
@@ -12,11 +13,21 @@ class Login extends BaseLogin
 
     public function getHeading(): string
     {
-        return 'Welcome back';
+        return '';
     }
 
     public function getSubheading(): ?string
     {
-        return 'Sign in to manage quizzes, orders, and integrations.';
+        return null;
+    }
+
+    public function hasLogo(): bool
+    {
+        return false;
+    }
+
+    public function getMaxWidth(): MaxWidth
+    {
+        return MaxWidth::Medium;
     }
 }
